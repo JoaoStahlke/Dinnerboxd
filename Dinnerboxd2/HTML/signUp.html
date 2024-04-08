@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/StyleBase.css">
+    <link rel="stylesheet" href="../CSS/StyleLogSig.css">
+    <title>Sign-up</title>
+</head>
+<body>
+    <header id="NavBarContainer"></header>
+    <script src="../Script/navBar.js"></script>
+    <div class="container">
+        <h1>Cadastre-se</h1>
+        <form  id="signUp" enctype="multipart/form-data">
+            <label for="userName">Nome</label>
+            <input type="text" id="userName" name="userName" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="repeatPassword">Repita a Senha</label>
+            <input type="password" id="repeatPassword" name="repeatPassword" required>
+
+            <div class="checkbox">
+                <label for="checkRestaurant" id="labelCheckRestaurant">Conta Restaurante</label>
+                <label class="switch">
+                    <input name="checkRestaurant" id="checkRestaurant" type="checkbox" onchange="insertRestaurantForm()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div id="restaurantForm"></div>
+
+            <button type="button" onclick="createUser()">Continuar</button>
+        </form>
+    </div>
+
+    <script src="../Script/signUp.js" ></script>
+</body>
+</html>
