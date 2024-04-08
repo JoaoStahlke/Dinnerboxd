@@ -17,7 +17,7 @@ function deleteAccount() {
     .then(response => response.json())
     .then(data => {
         if (data==true){
-            window.location="../HTML/home.html";
+            window.location="../HTML/home2.html";
             
         }
         document.querySelector(".sucess").style.color="red";

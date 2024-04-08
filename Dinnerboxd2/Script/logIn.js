@@ -26,7 +26,7 @@ function logIn(){
             throw new Error('Credenciais Inválidas.')
         }
         console.log('Log-in feito com sucesso:', data['userName'],'logado com sucesso!');
-        window.location="../HTML/home.html";
+        window.location="../HTML/home2.html";
 
     })
     .catch(error => {

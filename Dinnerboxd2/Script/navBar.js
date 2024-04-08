@@ -61,7 +61,7 @@ function restaurantBar(){
     var welcome = document.getElementById("userWelcome");
     welcome.innerHTML = "Configurações";
 
-    document.querySelector("#pageEdit").innerHTML="<a href='../HTML/home.html'><b>Editar Página</b></a>";
+    document.querySelector("#pageEdit").innerHTML="<a href='../HTML/home2.html'><b>Editar Página</b></a>";
 }
 
 

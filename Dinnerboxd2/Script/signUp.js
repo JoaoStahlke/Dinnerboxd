@@ -30,7 +30,7 @@ function createUser() {
     .then(data => {
         console.log('Cadastro feito com sucesso:', data);
         form.reset();
-        window.location="../HTML/home.html";
+        window.location="../HTML/home2.html";
     
     })
     .catch(error => console.error('Erro no cadastro:', error));
@@ -73,7 +73,7 @@ function createRestaurant(userName,email,password){
     .then(data => {
         console.log('Cadastro feito com sucesso:', data);
         form.reset();
-        window.location="../HTML/home.html";
+        window.location="../HTML/home2.html";
         
     
     })
