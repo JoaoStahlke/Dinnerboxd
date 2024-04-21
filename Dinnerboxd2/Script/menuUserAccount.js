@@ -2,22 +2,24 @@ function loadContainer(link) {
     fetch(link) // Carrega o conteúdo da barra de navegação do arquivo 'navbar.html'
     .then(response => response.text()) // Converte a resposta em texto
     .then(html => {
-        // Insere o HTML da barra de navegação no elemento com id 'navbarContainer'
         document.getElementById('container').innerHTML = html;
 
     })
     .catch(error => console.error('Erro ao carregar a barra de navegação:', error));
 
 }
-document.addEventListener('DOMContentLoaded', function () {
-    viewAccount();
-});
+
+
 
 function viewAccount(){
     loadContainer('../HTML/viewAccount.html');
     fetch('../PHP/getSessionData.php')
         .then(response => response.json())
         .then(data => {
+            
+            if(data.userCheck == false){
+                window.location="../HTML/logIn.html";
+            }
             var userName = data.userName;
             var email = data.email;
             document.querySelector("p[name='userName']").innerHTML = userName;
@@ -28,11 +30,13 @@ function viewAccount(){
             }
         })
         .catch(error => {
-            console.log('');
-            window.location="../HTML/logIn.html";
+            setTimeout(() => {
+                viewAccount()
+            }, 1000)
             });
     
 }
+
 function loadRestaurantInfo(){
     fetch('../PHP/getSessionData.php')
         .then(response => response.json())
@@ -170,3 +174,5 @@ function changeContacts(){
     script.src = "../Script/updateContacts.js";
     document.body.appendChild(script);
 }
+
+viewAccount();

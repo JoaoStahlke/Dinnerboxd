@@ -30,7 +30,7 @@ function createUser() {
     .then(data => {
         console.log('Cadastro feito com sucesso:', data);
         form.reset();
-        window.location="../HTML/home2.html";
+        window.location="../HTML/signUpSucess.html";
     
     })
     .catch(error => console.error('Erro no cadastro:', error));
@@ -73,7 +73,7 @@ function createRestaurant(userName,email,password){
     .then(data => {
         console.log('Cadastro feito com sucesso:', data);
         form.reset();
-        window.location="../HTML/home2.html";
+        window.location="../HTML/signUpSucess.html";
         
     
     })
@@ -86,8 +86,8 @@ function insertRestaurantForm() {
     var htmlElement = document.querySelector("#restaurantForm");
   
     if (checkbox.checked) {
-        fetch('../HTML/signUpRestaurant.html') // Carrega o conteúdo da barra de navegação do arquivo 'navbar.html'
-        .then(response => response.text()) // Converte a resposta em texto
+        fetch('../HTML/signUpRestaurant.html')
+        .then(response => response.text())
         .then(html => {
             htmlElement.innerHTML = html;
         })

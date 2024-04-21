@@ -20,3 +20,18 @@ CREATE TABLE IF NOT EXISTS Restaurant (
     FK_userId INT,
     FOREIGN KEY (FK_userId) REFERENCES User(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS Review (
+    reviewId INT AUTO_INCREMENT PRIMARY KEY,
+    reviewText TEXT NOT NULL,
+    reviewRating INT NOT NULL,
+    reviewDate VARCHAR(20) NOT NULL,
+    FK_userId INT,
+    FK_restaurantId INT,
+    FOREIGN KEY (FK_userId) REFERENCES User(id) ON DELETE CASCADE,
+    FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId) ON DELETE CASCADE
+
+
+);
+
+

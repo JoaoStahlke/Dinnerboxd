@@ -22,15 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkRestaurant']) &&
         $userId = $conn->insert_id;
 
         // Inserir dados na tabela restaurant
-        $sql2 = "INSERT INTO restaurant (FK_userId, restaurantDocument, restaurantPhone, restaurantLink, cityAddress, streetAddress, districtAddress, numberAddress ) VALUES ('$userId', '$restaurantDocument', '$phone', '$link','$cityAddress','$streetAddress','$districtAddress','$numberAddress')";
+        $sql2 = "INSERT INTO restaurant (FK_userId, restaurantDocument, restaurantPhone, restaurantLink, cityAddress, streetAddress, districtAddress, numberAddress ) 
+        VALUES ('$userId', '$restaurantDocument', '$phone', '$link','$cityAddress','$streetAddress','$districtAddress','$numberAddress')";
 
         if ($conn->query($sql2) === TRUE) {
             $restaurantId = $conn->insert_id;
             $response = array('userId' => $userId, 'userName' => $userName, 'email' => $email, 'restaurantId' => $restaurantId, 'cnpj' => $restaurantDocument, 'phone' => $phone, 'address' => $cityAddress, "-" => $streetAddress);
-            $_SESSION ['userName']=$userName;
-            $_SESSION ['userId']=$userId;
-            $_SESSION['checkRestaurant'] = $_POST['checkRestaurant'];
-            $_SESSION['restaurantId'] = $restaurantId;
+
             echo json_encode($response);
         } else {
             echo "Erro ao criar conta de restaurante: " . $conn->error;
@@ -49,8 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkRestaurant']) &&
     if ($conn->query($sql) === TRUE) {
         $userId = $conn->insert_id;
         $response = array('id' => $userId, 'userName' => $userName, 'email' => $email, 'password' => $password);
-        $_SESSION ['userName']=$userName;
-        $_SESSION ['userId']=$userId;
         echo json_encode($response);
 
     } else {

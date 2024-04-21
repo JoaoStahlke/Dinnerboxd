@@ -15,20 +15,23 @@ function wichNavBar(){
     fetch('../PHP/getSessionData.php')
         .then(response => response.json())
         .then(data => {
-            // var userId = data.userId;
-            // var userName = data.userName;
-            // if (!userId || !userName){
-            //     console.log(userName);
-            //     loadNavBar("../HTML/defaultNavBar.html");
-            // }
-            
 
-            loadNavBar("../HTML/loggedNavBar.html");
-            userWelcome();
+            if(data.userCheck==false){
+                loadNavBar("../HTML/defaultNavBar.html");
+                
+           }
+            else{
+                loadNavBar("../HTML/loggedNavBar.html");
+                userWelcome();
+            
+           }
             
         })
         .catch(error => 
-            loadNavBar("../HTML/defaultNavBar.html"));
+            setTimeout(() => {
+                wichNavBar()
+            }, 2000)
+            );
 }
 
 
@@ -46,7 +49,9 @@ function userWelcome(){
             }
         })
         .catch(error => {
-            console.log('Sessão sem usuário');
+            setTimeout(() => {
+                wichNavBar()
+            }, 500)
             });
     
     function firstName(name){
@@ -72,10 +77,20 @@ function logOut() {
     window.location="../HTML/logIn";
 }
 
-//Chama a função antes da pagina carregar
-document.addEventListener('DOMContentLoaded', function () {
-    // Chama a função para carregar a barra de navegação quando a página é carregada
-    wichNavBar();
-});
+wichNavBar();
 
 
+document.addEventListener("DOMContentLoaded", function() {
+    const container = document.querySelector('.list-shelf');
+    const scrollLeftBtn = document.querySelector('.left-btn-shelf');
+    const scrollRightBtn = document.querySelector('.right-btn-shelf');
+    const scrollAmount = 100; 
+  
+    scrollLeftBtn.addEventListener('click', function() {
+      container.scrollLeft -= scrollAmount;
+    });
+  
+    scrollRightBtn.addEventListener('click', function() {
+      container.scrollLeft += scrollAmount;
+    });
+  });
