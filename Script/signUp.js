@@ -136,21 +136,33 @@ function check (userName,email,password,repeatPassword){
 
 
     var password = document.querySelector("input[name='password']").value;
-if (
-    password.length < 8 ||                                 
-    !/[A-Z]/.test(password) ||                            
-    !/[a-z]/.test(password) ||                            
-    !/\d/.test(password) ||                                
-    !/[^A-Za-z0-9]/.test(password)                         
-) 
-{
+
+// Verifica se a senha tem pelo menos 8 caracteres
+if (password.length < 8) {
     document.querySelector("input[name='password']").style.borderColor = "red";
     var error = document.querySelector("label[for='password']");
     if (document.querySelector("label[for='password'] span") != null) {
         error.removeChild(document.querySelector("label[for='password'] span"));
     }
-    error.innerHTML += " <span class='error'>Sua senha deve atender aos critérios de uma senha forte.</span>";
+    error.innerHTML += " <span class='error'>Sua senha deve ter no mínimo 8 caracteres.</span>";
 }
+// Verifica se a senha contém pelo menos uma letra maiúscula
+else if (!/[A-Z]/.test(password)) {
+    // Adicione a lógica aqui para lidar com senhas sem letras maiúsculas
+}
+// Verifica se a senha contém pelo menos uma letra minúscula
+else if (!/[a-z]/.test(password)) {
+    // Adicione a lógica aqui para lidar com senhas sem letras minúsculas
+}
+// Verifica se a senha contém pelo menos um número
+else if (!/\d/.test(password)) {
+    // Adicione a lógica aqui para lidar com senhas sem números
+}
+// Verifica se a senha contém pelo menos um caractere especial
+else if (!/[^A-Za-z0-9]/.test(password)) {
+    // Adicione a lógica aqui para lidar com senhas sem caracteres especiais
+}
+
         
     
     else{
