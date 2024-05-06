@@ -135,14 +135,24 @@ function check (userName,email,password,repeatPassword){
     }
 
 
-    if(password.length<=5){
-        document.querySelector("input[name='password']").style.borderColor = "red";
-        var error = document.querySelector("label[for='password']");
-        if(document.querySelector("label[for='password'] span") !=null){
-            error.removeChild(document.querySelector("label[for='password'] span"));}
-        error.innerHTML+=" <span class='error'>Sua senha deve ter no minímo 6 caracteres.</span>";
-        
+    var password = document.querySelector("input[name='password']").value;
+if (
+    password.length < 8 ||                                 
+    !/[A-Z]/.test(password) ||                            
+    !/[a-z]/.test(password) ||                            
+    !/\d/.test(password) ||                                
+    !/[^A-Za-z0-9]/.test(password)                         
+) 
+{
+    document.querySelector("input[name='password']").style.borderColor = "red";
+    var error = document.querySelector("label[for='password']");
+    if (document.querySelector("label[for='password'] span") != null) {
+        error.removeChild(document.querySelector("label[for='password'] span"));
     }
+    error.innerHTML += " <span class='error'>Sua senha deve atender aos critérios de uma senha forte.</span>";
+}
+        
+    
     else{
         if(document.querySelector("label[for='password'] span") !=null){
             document.querySelector("label[for='password']").removeChild(document.querySelector("span"));}
