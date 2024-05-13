@@ -22,6 +22,11 @@ function viewAccount(){
             }
             var userName = data.userName;
             var email = data.email;
+            if(data.userImg && data.userImg !=null){
+                var profileImage = document.querySelector(".view-account-image");
+                var newSrc = data.userImg + '?timestamp=' + new Date().getTime();
+                profileImage.src=newSrc;
+            }
             document.querySelector("p[name='userName']").innerHTML = userName;
             document.querySelector("p[name='email']").innerHTML = email;
             if(data.restaurantCheck){
@@ -51,7 +56,7 @@ function loadRestaurantInfo(){
             
             var parentElement = document.getElementById("viewAccount");
 
-            var dados = [
+            var labels = [
                 {label: "CNPJ:", value: restaurantDocument},
                 {label: "Telefone:", value: restaurantPhone},
                 {label: "Link Externo:", value: restaurantLink},
@@ -62,7 +67,7 @@ function loadRestaurantInfo(){
             ];
             
             // Itere sobre o array e crie os elementos h3 e p
-            dados.forEach(function(item) {
+            labels.forEach(function(item) {
                 // Crie um novo elemento h3
                 var h3 = document.createElement("h3");
                 h3.textContent = item.label;
@@ -89,6 +94,11 @@ function changeProfile(){
         .then(response => response.json())
         .then(data => {
             var userName = data.userName;
+            if(data.userImg && data.userImg !=null){
+                var profileImage = document.querySelector(".profile-file-image");
+                var newSrc = data.userImg + '?timestamp=' + new Date().getTime();
+                profileImage.src=newSrc;
+            }
             document.querySelector("input[name='userName']").value = userName;
         })
         .catch(error => {
@@ -99,6 +109,17 @@ function changeProfile(){
     script.src = "../Script/updateProfile.js";
     document.body.appendChild(script);
 }
+
+function clickFile() {
+    document.querySelector(".profile-real-file").click();
+}
+  
+function changeFile() {
+    var fileName = document.querySelector('.profile-real-file').files[0].name;
+    document.querySelector(".profile-file-text").textContent = fileName;
+    
+  }
+  
 
 
 function changeEmail(){

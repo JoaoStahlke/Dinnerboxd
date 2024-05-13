@@ -2,7 +2,7 @@
 include "connect.php";
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET["restaurant"]) && $_GET["restaurant"] != null) {
     $restaurantId = $_GET["restaurant"];
-    $sql = "SELECT User.userName,Restaurant.restaurantPhone,Restaurant.restaurantLink,Restaurant.cityAddress,
+    $sql = "SELECT User.userName,User.userImg,Restaurant.restaurantPhone,Restaurant.restaurantLink,Restaurant.cityAddress,
     Restaurant.streetAddress,Restaurant.districtAddress,Restaurant.numberAddress
     FROM User JOIN Restaurant ON User.id = Restaurant.FK_userId WHERE Restaurant.restaurantId = $restaurantId";
     

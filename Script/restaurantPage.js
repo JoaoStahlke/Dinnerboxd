@@ -54,10 +54,37 @@ function userCheck(){
     })
     .catch(error => {
         setTimeout(() => {
-            viewAccount()
+            loadRestaurantPage()
         }, 1000)
         });
 
 }
 
 
+function loadRestaurantData(){
+    var urlParams = new URLSearchParams(window.location.search);
+    var restaurantId=urlParams.get("restaurant");
+    fetch(`../PHP/getRestaurantPageData.php?restaurant=${restaurantId}`)
+    .then(response => response.json())
+    .then(data => {
+        if(data.userImg && data.userImg!= null){
+            var img = data.userImg;
+        }
+        else{
+            var img = '';
+        }
+        document.querySelector(".restaurant-profile-img img").src=img;
+        document.querySelector(".restaurant-title").innerHTML=data.userName;
+        document.querySelector(".cityAddress").innerHTML+=" "+data.cityAddress;
+        document.querySelector(".streetAddress").innerHTML+=" "+data.streetAddress;
+        document.querySelector(".districtAddress").innerHTML+=" "+data.districtAddress;
+        document.querySelector(".numberAddress").innerHTML+=" "+data.numberAddress;
+        
+    })
+    .catch(error => {
+        setTimeout(() => {
+            loadRestaurantData()
+        }, 1000)
+        });
+
+}loadRestaurantData();

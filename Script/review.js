@@ -90,10 +90,11 @@ function review(){
             var text=data.text;
             var rating = data.rating;
             var name = correctName(data.name);
+            var photo = data.userImg;
             var date = data.date;
             var reviewId = data.reviewId;
             var userId = data.userId;
-            review.push({ userId,reviewId,name,text, rating,date });
+            review.push({ userId,reviewId,photo,name,text, rating,date });
             displayreview();
         
         })
@@ -105,21 +106,28 @@ function review(){
     function selectReviews(){
         var urlParams = new URLSearchParams(window.location.search);
         var restaurantId=urlParams.get("restaurant");
-        fetch(`../PHP/readReviewApi.php?restaurant=${restaurantId}`)
+        fetch(`../PHP/reviewApi.php?restaurant=${restaurantId}`)
         .then(response => response.json())
         .then(data => {
-            data.forEach(arrayReview=>{
+            if (data==false){
+                document.querySelector("#review-list").innerHTML="<br><h1>Sem avaliações ainda.</h1>";
+                return;
+            }
+            else{
+                data.forEach(arrayReview=>{
                 
-                var name = correctName(arrayReview.userName);
-                var text = arrayReview.reviewText;
-                var rating = arrayReview.reviewRating;
-                var date = arrayReview.reviewDate;
-                var reviewId = arrayReview.reviewId;
-                var userId = arrayReview.id;
-                review.push({ userId,reviewId,name,text, rating,date });
-                
-            });
-            displayreview();
+                    var name = correctName(arrayReview.userName);
+                    var photo = arrayReview.userImg;
+                    var text = arrayReview.reviewText;
+                    var rating = arrayReview.reviewRating;
+                    var date = arrayReview.reviewDate;
+                    var reviewId = arrayReview.reviewId;
+                    var userId = arrayReview.id;
+                    review.push({ userId,reviewId,photo,name,text, rating,date });
+                    
+                });
+                displayreview();
+            }
         })
         .catch(error => console.error('Erro ao carregar avaliações:', error));
     }selectReviews();
@@ -152,9 +160,20 @@ function review(){
             reviewDiv.classList.add('review-item');
             var stars = '★'.repeat(review[i].rating);
             var emptyStars = '☆'.repeat(5 - review[i].rating);
+
+            if (review[i].photo && review[i].photo!=null){
+                null;
+            }
+            else{
+                review[i].photo='';
+            }
+
             var reviewContent = `
             <div class="review">
-                <span class="review-name">${review[i].name}</span>
+                <div class="review-profile">
+                    <span class="review-photo-background"><img class="review-photo" src="${review[i].photo}"></span>
+                    <span class="review-name">${review[i].name}</span>
+                </div>
                 <span class="stars">${stars}${emptyStars}</span>
                 <p class="review-text">${review[i].text}</p>
                 <span class="review-date">${review[i].date}</span>
@@ -347,3 +366,6 @@ function updateReview(reviewId,rating,text) {
         console.log("erro ao alterar avaliação");
     });
 }
+
+
+
