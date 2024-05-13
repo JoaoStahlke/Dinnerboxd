@@ -28,7 +28,6 @@ function createUser() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         if(data==false){//verifica email unico
             errorEmailNotUnique();
         }
@@ -77,10 +76,14 @@ function createRestaurant(userName,email,password){
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Cadastro feito com sucesso:', data);
-        form.reset();
-        window.location="../HTML/signUpSucess.html";
-        
+        if(data==false){//verifica email unico
+            errorEmailNotUnique();
+        }
+        else{
+            console.log('Cadastro feito com sucesso:', data);
+            form.reset();
+            window.location="../HTML/signUpSucess.html";
+        }
     
     })
     .catch(error => console.error('Erro no cadastro:', error));
@@ -135,43 +138,19 @@ function check (userName,email,password,repeatPassword){
     }
 
 
-    var password = document.querySelector("input[name='password']").value;
-var errorMessage = ""; // Variável para armazenar mensagens de erro
-
-if (password.length < 8) {
-    errorMessage += "A senha deve ter no mínimo 8 caracteres.<br>";
-}
-
-if (!/[A-Z]/.test(password)) {
-    errorMessage += "A senha deve conter pelo menos uma letra maiúscula.<br>";
-}
-
-if (!/[a-z]/.test(password)) {
-    errorMessage += "A senha deve conter pelo menos uma letra minúscula.<br>";
-}
-
-if (!/\d/.test(password)) {
-    errorMessage += "A senha deve conter pelo menos um número.<br>";
-}
-
-if (!/[^A-Za-z0-9]/.test(password)) {
-    errorMessage += "A senha deve conter pelo menos um caractere especial.<br>";
-}
-
-if (errorMessage !== "") {
-    document.querySelector("input[name='password']").style.borderColor = "red";
-    var error = document.querySelector("label[for='password']");
-    if (document.querySelector("label[for='password'] span") != null) {
-        error.removeChild(document.querySelector("label[for='password'] span"));
+    if(password.length<=5){
+        document.querySelector("input[name='password']").style.borderColor = "red";
+        var error = document.querySelector("label[for='password']");
+        if(document.querySelector("label[for='password'] span") !=null){
+            error.removeChild(document.querySelector("label[for='password'] span"));}
+        error.innerHTML+=" <span class='error'>Sua senha deve ter no minímo 6 caracteres.</span>";
+        
     }
-    error.innerHTML += " <span class='error'>" + errorMessage + "</span>";
-} else {
-    if (document.querySelector("label[for='password'] span") != null) {
-        document.querySelector("label[for='password']").removeChild(document.querySelector("span"));
+    else{
+        if(document.querySelector("label[for='password'] span") !=null){
+            document.querySelector("label[for='password']").removeChild(document.querySelector("span"));}
+        document.querySelector("input[name='password']").style.borderColor = "";
     }
-    document.querySelector("input[name='password']").style.borderColor = "";
-}
-
 
     if (password!==repeatPassword){
         document.querySelector("input[name='repeatPassword']").style.borderColor = "red";

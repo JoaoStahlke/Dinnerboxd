@@ -1,4 +1,10 @@
 function updateProfile() {
+    var fileInput = document.querySelector('.profile-real-file');
+    if (fileInput.files && fileInput.files.length > 0) {
+        updateProfileImage(fileInput.files[0]);
+    }
+
+
     var form = document.getElementById('userConfig');
     var userName = form.userName.value.toUpperCase();
 
@@ -18,7 +24,7 @@ function updateProfile() {
     .then(data => {
         document.querySelector(".sucess").innerHTML="Nome trocado com sucesso!";
         wichNavBar();
-    
+        
     })
     .catch(error => console.error('Erro no update:', error));
 }
@@ -45,3 +51,37 @@ function check (userName){
         return true;
     }
 }
+
+
+function updateProfileImage(file){
+    var formData = new FormData();
+    formData.append('file', file);
+    formData.append('image',true)
+
+
+    fetch('../PHP/profileImgApi.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.error==false){
+            if(data.type==1){
+                document.querySelector(".errorImg").innerHTML="O arquivo enviado não está no formato : PNG, JPEG ou JPG";
+            }
+            else{
+                document.querySelector(".errorImg").innerHTML="Erro no envio do arquivo!";
+            }
+        }
+        else{
+            document.querySelector(".sucess").innerHTML="Foto trocada com sucesso!";
+            changeProfile();
+        }
+        
+    
+    })
+    .catch(error => console.error('Erro no update da foto:', error));
+
+
+}
+

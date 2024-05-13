@@ -1,6 +1,14 @@
 
 <h1>Perfil</h1>
 <form  id="userConfig" enctype="multipart/form-data">
+    <div class="profile-file">
+        <span class="profile-file-image-background"><img src="" class="profile-file-image"></span>
+        <input type="file" class="profile-real-file" name="img" onchange="changeFile()" accept="image/*" hidden />
+        <button type="button" class="profile-file-button" onclick="clickFile()">Escolher Arquivo</button>
+        <span class="profile-file-text">Nenhum arquivo selecionado</span>
+        <span class="profile-file-text error errorImg"></span>
+        
+    </div>
     <label for="userName">Nome</label>
     <input type="text" id="userName" name="userName" required>
     

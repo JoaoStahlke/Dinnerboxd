@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("is", $userId, $password);
     $stmt->execute();
     $stmt->store_result();
+    $directory = "../DATA/$userId";
+    deleteDirectory($directory);
 
     if ($stmt->num_rows > 0) {
         $stmt = $conn->prepare("DELETE FROM User WHERE id = ?");
@@ -29,6 +31,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->close();
+}
+
+
+function deleteDirectory($dir) {
+    if (!file_exists($dir)) {
+        return true;
+    }
+
+    if (!is_dir($dir)) {
+        return unlink($dir);
+    }
+
+    foreach (scandir($dir) as $item) {
+        if ($item == '.' || $item == '..') {
+            continue;
+        }
+
+        if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+            return false;
+        }
+    }
+
+    return rmdir($dir);
 }
 
 $conn->close();

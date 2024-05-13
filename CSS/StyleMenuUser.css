@@ -1,15 +1,17 @@
-
 .container {
     max-width: 870px;
     min-height: 300px;
     margin: 0 auto;
     padding: 30px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow:  0px 0px 20px rgb(0, 0, 0);
+    border:1px solid transparent;
+    border-color: black;
     border-radius: 4px;
     margin-top: 100px ;
     margin-left: 300px;
     margin-right: 10%;
+    margin-bottom: 10%;
     display: block;
     
 }
@@ -68,3 +70,73 @@ span.sucess{
     font-size: x-small;
     font-family: "sans-serif";
 }
+
+
+
+.view-account-image-background{
+    display: block;
+    min-width: 20%;
+    max-width: 20%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background-color: #ccc;
+    border-radius: 5px;
+}
+.view-account-image{
+    min-width: 100%;
+    max-width: 100%;
+    object-fit:cover;
+    overflow: hidden;
+    margin:0;
+    align-content: center;
+}
+
+
+
+
+
+
+
+.profile-file{
+    width: 100%;
+    display: block;
+}
+
+
+.profile-file-image-background{
+    display: block;
+    min-width: 30%;
+    max-width: 30%;
+    aspect-ratio: 1/1;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+
+
+.profile-file-image{
+    min-width: 100%;
+    max-width: 100%;
+    object-fit:cover;
+    overflow: hidden;
+    margin:0;
+    align-content: center;
+    display: block;
+}
+
+.profile-file-button{
+    margin: auto;
+    display: block;
+}
+.profile-file-text{
+    font-size: xx-small;
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+

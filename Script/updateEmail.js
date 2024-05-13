@@ -19,10 +19,10 @@ function updateEmail() {
     .then(response => response.json())
     .then(data => {
         document.querySelector(".sucess").innerHTML="Email trocado com sucesso!";
-        if (data.var==false && data.email ==2){
+        if (data.error==false && data.email ==2){
             document.querySelector(".sucess").style.color="red";
             document.querySelector(".sucess").innerHTML="Email já alterado!";
-        }else if (data.var==false && data.email ==1){
+        }else if (data.error==false && data.email ==1){
             document.querySelector(".sucess").innerHTML="";
             errorEmailNotUnique();
         }

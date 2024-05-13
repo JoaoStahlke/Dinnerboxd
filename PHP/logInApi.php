@@ -1,6 +1,7 @@
 <?php
 include 'connect.php';
-
+session_start();
+session_destroy();
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     //forma segura de manipular os dados
     // Prepare a query
-    $stmt = $conn->prepare("SELECT id, userName, email FROM User WHERE email = ? AND password = ?");
+    $stmt = $conn->prepare("SELECT id, userName, email, userImg FROM User WHERE email = ? AND password = ?");
     // Bind parameters
     $stmt->bind_param("ss", $email, $password);
     // Execute the query
@@ -24,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['userId'] = $row["id"];
         $_SESSION['userName'] = $row["userName"];
         $_SESSION['email'] = $row["email"]; 
+        $_SESSION['userImg'] = $row["userImg"]; 
 
 
         $sql = "SELECT restaurantDocument, restaurantPhone, restaurantLink, cityAddress, streetAddress, districtAddress, numberAddress FROM Restaurant WHERE FK_userId = '" . $_SESSION['userId'] . "'";

@@ -8,13 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $sql = "SELECT email FROM User WHERE email ='$email' ";
     $result = $conn->query($sql);
     if ($email == $_SESSION['email']){
-        $response = array('email' => 2,'var'=> FALSE);
+        $response = array('email' => 2,'error'=> FALSE);
         echo json_encode($response);
         $conn->close();
         exit;}
     
     if ($result->num_rows > 0) {
-        $response = array('email' => 1,'var'=> FALSE);
+        $response = array('email' => 1,'error'=> FALSE);
         echo json_encode($response);
         $conn->close();
         exit;}

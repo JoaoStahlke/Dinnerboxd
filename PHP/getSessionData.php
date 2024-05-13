@@ -6,6 +6,7 @@ if (isset($_SESSION['restaurantCheck']) && $_SESSION['restaurantCheck']===true){
         'userId' => $_SESSION['userId'],
         'userName' => $_SESSION['userName'],
         'email'=>$_SESSION['email'],
+        'userImg'=>$_SESSION['userImg'],
         'restaurantCheck'=> $_SESSION['restaurantCheck'],
         'restaurantDocument'=> $_SESSION['restaurantDocument'],
         'restaurantLink'=> $_SESSION['restaurantLink'],
@@ -22,7 +23,7 @@ else if(isset($_SESSION['userId'])){
         'userId' => $_SESSION['userId'],
         'userName' => $_SESSION['userName'],
         'email'=>$_SESSION['email'],
-
+        'userImg'=>$_SESSION['userImg'],
     ));
 }
 else{
