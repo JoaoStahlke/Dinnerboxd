@@ -86,7 +86,7 @@ html{
 .item-shelf{
     display: block;
     margin: 3px 10px 3px 10px;
-    --item-width:22vi;
+    --item-width:21.5vi;
 }
 
 .image-item{
