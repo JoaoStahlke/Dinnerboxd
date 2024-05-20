@@ -4,10 +4,11 @@ function createUser() {
     var email = form.email.value;
     var password = form.password.value;
     var repeatPassword = form.repeatPassword.value;
+    var universidade = form.universidade.value;
 
     var checkbox = document.querySelector("#checkRestaurant");
 
-    if(!check(userName,email,password,repeatPassword)){
+    if(!check(userName,email,password,repeatPassword,universidade)){
         return;
     }
     if (checkbox.checked){
@@ -20,6 +21,7 @@ function createUser() {
     formData.append('userName', userName);
     formData.append('email', email);
     formData.append('password', password);
+    formData.append('universidade', universidade);
 
 
     fetch('../PHP/createUserApi.php', {

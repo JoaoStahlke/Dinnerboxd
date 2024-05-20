@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS User (
     userName VARCHAR(255) NOT NULL,
     userImg VARCHAR(255),
     email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    universidade VARCHAR(45) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Restaurant (
