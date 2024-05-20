@@ -138,37 +138,33 @@ function check (userName,email,password,repeatPassword){
     }
 
 
-    if(password.length<=8){
-        errorMessage += "A senha deve ter no mínimo 8 caracteres.<br>";
-
-    }
-    if (!/[A-Z]/.test(password)) {
-        errorMessage += "A senha deve conter pelo menos uma letra maiúscula.<br>";
-    }
-    if (!/[a-z]/.test(password)) {
-        errorMessage += "A senha deve conter pelo menos uma letra minúscula.<br>";
-    }
-    if (!/\d/.test(password)) {
-        errorMessage += "A senha deve conter pelo menos um número.<br>";
-    }
-    if (!/[^A-Za-z0-9]/.test(password)) {
-        errorMessage += "A senha deve conter pelo menos um caractere especial.<br>";
-    }
-    if (errorMessage !== "") {
+    if(password.length<=5){
         document.querySelector("input[name='password']").style.borderColor = "red";
         var error = document.querySelector("label[for='password']");
-        if (document.querySelector("label[for='password'] span") != null) {
-            error.removeChild(document.querySelector("label[for='password'] span"));
-        }
-        error.innerHTML += " <span class='error'>" + errorMessage + "</span>";
-    } else {
-        if (document.querySelector("label[for='password'] span") != null) {
-            document.querySelector("label[for='password']").removeChild(document.querySelector("span"));
-        }
+        if(document.querySelector("label[for='password'] span") !=null){
+            error.removeChild(document.querySelector("label[for='password'] span"));}
+        error.innerHTML+=" <span class='error'>Sua senha deve ter no minímo 6 caracteres.</span>";
+        
+    }
+    else{
+        if(document.querySelector("label[for='password'] span") !=null){
+            document.querySelector("label[for='password']").removeChild(document.querySelector("span"));}
         document.querySelector("input[name='password']").style.borderColor = "";
     }
+
     if (password!==repeatPassword){
         document.querySelector("input[name='repeatPassword']").style.borderColor = "red";
+        var error = document.querySelector("label[for='repeatPassword']");
+        if(document.querySelector("label[for='repeatPassword'] span") !=null){
+            error.removeChild(document.querySelector("label[for='repeatPassword'] span"));}
+        error.innerHTML+="  <span class='error'>As senhas digitadas não coincidem.</span>";
+        
+    }
+    else{
+        if(document.querySelector("label[for='repeatPassword'] span") !=null){
+            document.querySelector("label[for='repeatPassword']").removeChild(document.querySelector("span"));}
+        document.querySelector("input[name='repeatPassword']").style.borderColor = "";
+    }
 
     
     if (error==null){
@@ -299,4 +295,4 @@ function errorEmailNotUnique(){
     error.innerHTML+=" <span class='error'>Email já Cadastrado.</span>";
 
 
-}}
+}
