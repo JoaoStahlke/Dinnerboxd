@@ -56,10 +56,9 @@ function check (userName){
 function updateProfileImage(file){
     var formData = new FormData();
     formData.append('file', file);
-    formData.append('image',true)
+    formData.append('profile',true);
 
-
-    fetch('../PHP/profileImgApi.php', {
+    fetch('../PHP/storageImages.php', {
         method: 'POST',
         body: formData
     })

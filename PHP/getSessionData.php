@@ -7,6 +7,7 @@ if (isset($_SESSION['restaurantCheck']) && $_SESSION['restaurantCheck']===true){
         'userName' => $_SESSION['userName'],
         'email'=>$_SESSION['email'],
         'userImg'=>$_SESSION['userImg'],
+        'restaurantId'=> $_SESSION['restaurantId'],
         'restaurantCheck'=> $_SESSION['restaurantCheck'],
         'restaurantDocument'=> $_SESSION['restaurantDocument'],
         'restaurantLink'=> $_SESSION['restaurantLink'],

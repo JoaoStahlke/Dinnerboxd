@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS Restaurant (
     streetAddress VARCHAR(255) NOT NULL,
     districtAddress VARCHAR(255) NOT NULL,
     numberAddress VARCHAR(255) NOT NULL,
+    restaurantText TEXT,
+    restaurantBanner VARCHAR(255),
     FK_userId INT,
     FOREIGN KEY (FK_userId) REFERENCES User(id) ON DELETE CASCADE
 );
@@ -33,5 +35,4 @@ CREATE TABLE IF NOT EXISTS Review (
     FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId) ON DELETE CASCADE
 
 );
-
 

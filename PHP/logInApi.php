@@ -28,11 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['userImg'] = $row["userImg"]; 
 
 
-        $sql = "SELECT restaurantDocument, restaurantPhone, restaurantLink, cityAddress, streetAddress, districtAddress, numberAddress FROM Restaurant WHERE FK_userId = '" . $_SESSION['userId'] . "'";
+        $sql = "SELECT restaurantId, restaurantDocument, restaurantPhone, restaurantLink, cityAddress, streetAddress, districtAddress, numberAddress FROM Restaurant WHERE FK_userId = '" . $_SESSION['userId'] . "'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $_SESSION['restaurantCheck'] = true; 
+            $_SESSION['restaurantId'] = $row["restaurantId"];
             $_SESSION['restaurantDocument'] = $row["restaurantDocument"];
             $_SESSION['restaurantPhone'] = $row["restaurantPhone"];
             $_SESSION['restaurantLink'] = $row["restaurantLink"]; 

@@ -1,8 +1,5 @@
 
 /* BANNER */
-html{
- --section-main-bg-color:#111616;
-}
 .section-banner{
     width: 100%;
     height: 50vw;
@@ -19,7 +16,7 @@ html{
     margin: 0;
     align-self: center;
     z-index: -1;
-    filter: blur(4px);
+    filter: blur(4px) brightness(80%);
 }
 .image-text{
     margin-top: -1%;
@@ -108,7 +105,8 @@ html{
     color:#ffff;
     font-weight: 600;
     text-align: center;
-    font-size: 90%;
+    font-size: 1.5vw;
+    margin-top: 3px;
     @media screen and (max-width: 800px) {
         font-size: 50%; 
     } 
@@ -117,7 +115,7 @@ html{
 .right-btn-shelf,
 .left-btn-shelf{
     height: 20%;
-    margin-top: 9%;
+    margin-top: 8.5vw;
     background-color:rgba(0, 0, 0, 0);
     display: flex;
     justify-content: center;

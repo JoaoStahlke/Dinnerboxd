@@ -79,12 +79,169 @@ function loadRestaurantData(){
         document.querySelector(".streetAddress").innerHTML+=" "+data.streetAddress;
         document.querySelector(".districtAddress").innerHTML+=" "+data.districtAddress;
         document.querySelector(".numberAddress").innerHTML+=" "+data.numberAddress;
+        document.querySelector(".restaurantPhone a").href='https://wa.me/'+data.restaurantPhone;
+        document.querySelector(".instagram a").href="https:"+data.restaurantLink;
+        document.querySelector(".section-banner img").src=data.restaurantBanner;
+        if(data.restaurantText == null){
+            data.restaurantText='';
+        }
+        document.querySelector(".text-about-us").innerHTML=`<p>${data.restaurantText}</p>`;
         
     })
     .catch(error => {
         setTimeout(() => {
             loadRestaurantData()
-        }, 1000)
+        }, 10000)
         });
 
 }loadRestaurantData();
+
+function copyUrltoClipboard(){
+    var x =document.querySelector(".share").innerHTML; 
+    var url = window.location.href;
+    navigator.clipboard.writeText(url)
+    document.querySelector(".share").innerHTML="<b>Link Copiado!</b>";
+    setTimeout(() => {
+        document.querySelector(".share").innerHTML=x
+    }, 2000)
+}
+
+
+
+// Checar se é o dono do restaurante para permitir a edição do conteudo
+function checkOwnerRestaurant(){
+    var urlParams = new URLSearchParams(window.location.search);
+    var restaurantId=urlParams.get("restaurant");
+    
+    fetch('../PHP/getSessionData.php')
+    .then(response => response.json())
+    .then(data => {
+        if (restaurantId == data.restaurantId){
+            ownerRestaurant();
+        }
+    })
+    .catch(error => {
+        console.log('');
+        });
+    
+}checkOwnerRestaurant();
+
+function ownerRestaurant(){
+    var banner = document.querySelector(".section-banner");
+    banner.innerHTML+=`
+    <a onclick="clickFile()"><img src="../IMG/photoIcon.svg"></a>
+    <input type="file" class="real-file" onchange="changeFile()" name="img" accept="image/*" hidden />
+    <span><button type="button" onclick="updateRestaurantBanner()">Confirmar</button></span>
+    `;
+    var subtitle = document.querySelector(".about-us h1");
+    subtitle.innerHTML+=`<a onclick="clickEditAboutUs()"><img src="../IMG/penIcon.svg"></a>`;
+}
+
+
+
+
+// Update do Banner
+
+function updateRestaurantBanner(){
+    var file = document.querySelector('.real-file');
+    var formData = new FormData();
+    formData.append('file', file.files[0]);
+    formData.append('banner',true);
+
+
+    fetch('../PHP/storageImages.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.error==false){
+            if(data.type==1){
+                document.querySelector(".section-banner span").innerHTML+="<p>Formato inválido!</p>";
+                document.querySelector(".section-banner span").style.color='red';
+            }
+            else{
+                document.querySelector(".section-banner span").innerHTML+="<p>Erro no envio do arquivo!</p>";
+                document.querySelector(".section-banner span").style.color='red';
+            }
+        }
+        document.querySelector(".section-banner span button").style.display = 'none';
+        var banner = document.querySelector(".section-banner img");
+        var newSrc = data.path + '?timestamp=' + new Date().getTime();
+        banner.src=newSrc;
+
+        
+    
+    })
+    .catch(error => console.error('Erro no update da imagem:', error));
+
+}
+
+function clickFile() {
+    document.querySelector(".real-file").click();
+    if(document.querySelector(".section-banner span p")){
+        document.querySelector(".section-banner span").removeChild(document.querySelector(".section-banner span p"));
+    }
+    
+    
+}
+
+
+function changeFile(){
+    document.querySelector(".section-banner span button").style.display = 'block';
+}
+
+
+// Update do texto sobre nós
+function clickEditAboutUs(){
+    text=document.querySelector(".text-about-us p").innerHTML;
+    document.querySelector(".text-about-us").innerHTML=`
+    <textarea class='textarea-about-us'  rows='4' cols='50'></textarea>
+    <div class="buttons-about-us">
+        <button onclick="updateAboutUs()" class="update-about-us">Confirmar</button> 
+        <button class="update-cancel-about-us" onclick="cancelUpdateAboutUs()">Cancelar</button>
+    </div>
+    `;
+    document.querySelector(".text-about-us textarea").value=text;
+}
+
+function updateAboutUs(){
+    var text=document.querySelector(".text-about-us textarea").value;
+    var formData = new FormData();
+    formData.append('text', text);
+    formData.append('aboutUs',true);
+
+
+    fetch('../PHP/updateRestaurantPage.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.querySelector(".text-about-us").innerHTML=data.text;
+    })
+    .catch(error => console.error('Erro no update do texto:', error));
+    
+}
+
+function cancelUpdateAboutUs(){
+    var urlParams = new URLSearchParams(window.location.search);
+    var restaurantId=urlParams.get("restaurant");
+    fetch(`../PHP/getRestaurantPageData.php?restaurant=${restaurantId}`)
+    .then(response => response.json())
+    .then(data => {
+        if(data.restaurantText == null){
+            data.restaurantText='';
+        }
+        document.querySelector(".text-about-us").innerHTML=`<p>${data.restaurantText}</p>`;
+        
+    })
+    .catch(error => {});
+}
+
+
+
+
+
+
+
