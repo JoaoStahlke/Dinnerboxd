@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkRestaurant']) &&
     $userName = $_POST['userName'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $universidade = $_POST['universidade'];
     $restaurantDocument = $_POST['restaurantDocument'];
     $phone = $_POST['phone'];
     $link = $_POST['link'];
@@ -29,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkRestaurant']) &&
     $numberAddress = $_POST['numberAddress'];
 
     // Inserir dados na tabela User
-    $sql1 = "INSERT INTO User (userName, email, password, universidade ) VALUES ('$userName', '$email', '$password', '$universidade')";
+    $sql1 = "INSERT INTO User (userName, email, password ) VALUES ('$userName', '$email', '$password')";
     if ($conn->query($sql1) === TRUE) {
         // Obter o ID inserido na tabela User
         $userId = $conn->insert_id;
@@ -40,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkRestaurant']) &&
 
         if ($conn->query($sql2) === TRUE) {
             $restaurantId = $conn->insert_id;
-            $response = array('userId' => $userId, 'userName' => $userName, 'email' => $email,'universidade' => $universidade, 'restaurantId' => $restaurantId, 'cnpj' => $restaurantDocument, 'phone' => $phone, 'address' => $cityAddress, "-" => $streetAddress);
+            $response = array('userId' => $userId, 'userName' => $userName, 'email' => $email, 'restaurantId' => $restaurantId, 'cnpj' => $restaurantDocument, 'phone' => $phone, 'address' => $cityAddress, "-" => $streetAddress);
 
             echo json_encode($response);
         } else {
@@ -54,13 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkRestaurant']) &&
     $userName = $_POST['userName'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $universidade = $_POST['universidade'];
 
 
-    $sql = "INSERT INTO User (userName, email, password, universidade) VALUES ('$userName', '$email', '$password', '$universidade')";
+    $sql = "INSERT INTO User (userName, email, password ) VALUES ('$userName', '$email', '$password')";
     if ($conn->query($sql) === TRUE) {
         $userId = $conn->insert_id;
-        $response = array('id' => $userId, 'userName' => $userName, 'email' => $email, 'password' => $password, 'universidade' => $universidade);
+        $response = array('id' => $userId, 'userName' => $userName, 'email' => $email, 'password' => $password);
         echo json_encode($response);
 
     } else {
