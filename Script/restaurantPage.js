@@ -243,8 +243,38 @@ function cancelUpdateAboutUs(){
 
 
 function loadStatus(){
+    let date = new Date();
+    let hour = date.getHours().toString()+date.getMinutes().toString();
+    let day = date.getDay();
+    var urlParams = new URLSearchParams(window.location.search);
+    var restaurantId=urlParams.get("restaurant");
+    fetch(`../PHP/openHourApi.php?restaurant=${restaurantId}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data[day*2] <= data[(day*2)+1]){
+            if (hour>=data[day*2] && hour<data[(day*2)+1]){
+                document.querySelector(".restaurantStatus b").innerHTML=' Aberto';
+                document.querySelector("#status-dot").style.color='green';
+            }
+            else{
+                document.querySelector(".restaurantStatus b").innerHTML=' Fechado';
+                document.querySelector("#status-dot").style.color='red';
+            }
+        }
+        else{
+            if (hour>=data[(day*2)+1] && hour>=data[day*2]){
+                document.querySelector(".restaurantStatus b").innerHTML=' Aberto';
+                document.querySelector("#status-dot").style.color='green';
+            }
+            else{
+                document.querySelector(".restaurantStatus b").innerHTML=' Fechado';
+                document.querySelector("#status-dot").style.color='red';
+            }}
+    })
+    .catch(error => console.error('Erro ao carregar status:', error));
+    console.log(`Horário atual: ${hour}${day}`);
     
-}
+}loadStatus();
 
 function loadOpenHours(){
     var urlParams = new URLSearchParams(window.location.search);
@@ -252,27 +282,14 @@ function loadOpenHours(){
     fetch(`../PHP/openHourApi.php?restaurant=${restaurantId}`)
     .then(response => response.json())
     .then(data => {
-        document.querySelector(`#day1`).innerHTML=`${data.hourOpen1.substring(0, 2) + ":" + data.hourOpen1.substring(2)} às ${data.hourClose1.substring(0, 2) + ":" + data.hourClose1.substring(2)}`;
-        document.querySelector(`#day2`).innerHTML=`${data.hourOpen2.substring(0, 2) + ":" + data.hourOpen2.substring(2)} às ${data.hourClose2.substring(0, 2) + ":" + data.hourClose2.substring(2)}`;
-        document.querySelector(`#day3`).innerHTML=`${data.hourOpen3.substring(0, 2) + ":" + data.hourOpen3.substring(2)} às ${data.hourClose3.substring(0, 2) + ":" + data.hourClose3.substring(2)}`;
-        document.querySelector(`#day4`).innerHTML=`${data.hourOpen4.substring(0, 2) + ":" + data.hourOpen4.substring(2)} às ${data.hourClose4.substring(0, 2) + ":" + data.hourClose4.substring(2)}`;
-        document.querySelector(`#day5`).innerHTML=`${data.hourOpen5.substring(0, 2) + ":" + data.hourOpen5.substring(2)} às ${data.hourClose5.substring(0, 2) + ":" + data.hourClose5.substring(2)}`;
-        document.querySelector(`#day6`).innerHTML=`${data.hourOpen6.substring(0, 2) + ":" + data.hourOpen6.substring(2)} às ${data.hourClose6.substring(0, 2) + ":" + data.hourClose6.substring(2)}`;
-        document.querySelector(`#day7`).innerHTML=`${data.hourOpen7.substring(0, 2) + ":" + data.hourOpen7.substring(2)} às ${data.hourClose7.substring(0, 2) + ":" + data.hourClose7.substring(2)}`;
-            
-        
+        let j=1;
+        for(let i=0;i<=13;i+=2){
+            document.querySelector(`#day${j}`).innerHTML=`${data[i].substring(0, 2) + ":" + data[i].substring(2)} às ${data[i+1].substring(0, 2) + ":" + data[i+1].substring(2)}`;
+            j++;
+        }
     })
     .catch(error => console.error('Erro ao carregar horários:', error));
 }loadOpenHours();
 
 
 
-let dataAtual = new Date();
-
-// Obtendo o horário atual
-let horaAtual = dataAtual.getHours();
-let minutoAtual = dataAtual.getMinutes();
-let day = dataAtual.getDay();
-
-// Exibindo o horário atual
-console.log(`Horário atual: ${horaAtual}${minutoAtual}${day}`);

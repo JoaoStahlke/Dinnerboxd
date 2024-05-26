@@ -156,6 +156,11 @@
     height: 26px;
     
 }
+#status-dot{
+    font-size: 22px;
+    padding: 0;
+    margin: 0;
+}
 
 
 

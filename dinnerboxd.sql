@@ -52,7 +52,24 @@ CREATE TABLE IF NOT EXISTS RestaurantOpenHour (
     hourClose6 VARCHAR(5),
     hourOpen7 VARCHAR(5),
     hourClose7 VARCHAR(5),
-    fk_restaurantId INT,
+    FK_restaurantId INT,
     FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId) ON DELETE CASCADE
+    
+);
+
+CREATE TABLE IF NOT EXISTS RestaurantModality (
+    modalityId INT AUTO_INCREMENT PRIMARY KEY,
+    modality VARCHAR(30),
+    fk_restaurantId INT,
+    FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId)
+    
+);
+
+
+CREATE TABLE IF NOT EXISTS RestaurantCategory (
+    categoryId INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(30),
+    fk_restaurantId INT,
+    FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId)
     
 );

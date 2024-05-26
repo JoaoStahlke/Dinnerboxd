@@ -59,8 +59,9 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['restaurant'])) {
             WHERE FK_restaurantId = '$restaurantId'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $hours = $result->fetch_assoc();
-        header('Content-Type: application/json');
+        
+        // $hours[] = [$open1, $close1, $open2, $close2, $open3, $close3, $open4, $close4, $open5, $close5, $open6, $close6, $open7, $close7];
+        $hours = $result->fetch_array();
         echo json_encode($hours);
     } else {
         echo json_encode(FALSE);
