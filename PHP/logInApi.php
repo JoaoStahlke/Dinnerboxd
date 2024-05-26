@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['userImg'] = $row["userImg"]; 
 
 
-        $sql = "SELECT restaurantId, restaurantDocument, restaurantPhone, restaurantLink, cityAddress, streetAddress, districtAddress, numberAddress FROM Restaurant WHERE FK_userId = '" . $_SESSION['userId'] . "'";
+        $sql = "SELECT salario,restaurantId, restaurantDocument, restaurantPhone, restaurantLink, cityAddress, streetAddress, districtAddress, numberAddress FROM Restaurant WHERE FK_userId = '" . $_SESSION['userId'] . "'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['streetAddress'] = $row["streetAddress"];
             $_SESSION['districtAddress'] = $row["districtAddress"];
             $_SESSION['numberAddress'] = $row["numberAddress"]; 
+            $_SESSION['restaurantSalario'] = $row["salario"]; 
             
         }
  

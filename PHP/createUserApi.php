@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkRestaurant']) &&
 
         // Inserir dados na tabela restaurant
         $sql2 = "INSERT INTO Restaurant (FK_userId, restaurantDocument, restaurantPhone, restaurantLink, cityAddress, streetAddress, districtAddress, numberAddress ) 
-        VALUES ('$userId', '$restaurantDocument', '$phone', '$link','$cityAddress','$streetAddress','$districtAddress','$numberAddress')";
+                VALUES ('$userId', '$restaurantDocument', '$phone', '$link','$cityAddress','$streetAddress','$districtAddress','$numberAddress')";
 
         if ($conn->query($sql2) === TRUE) {
             $restaurantId = $conn->insert_id;

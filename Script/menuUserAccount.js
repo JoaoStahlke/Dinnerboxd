@@ -90,6 +90,7 @@ function loadRestaurantInfo(){
 
 function changeProfile(){
     loadContainer("../HTML/changeProfile.html");
+    
     fetch('../PHP/getSessionData.php')
         .then(response => response.json())
         .then(data => {
@@ -104,10 +105,13 @@ function changeProfile(){
         .catch(error => {
             console.log('');
             });
-
+    setTimeout(function() {
     var script = document.createElement('script');
     script.src = "../Script/updateProfile.js";
     document.body.appendChild(script);
+    }, 50);
+
+    
 }
 
 function clickFile() {
@@ -133,10 +137,11 @@ function changeEmail(){
         .catch(error => {
             console.log('');
             });
-
+    setTimeout(function() {
     var script = document.createElement('script');
     script.src = "../Script/updateEmail.js";
     document.body.appendChild(script);
+    }, 50);
 }
 
 function changePassword(){
@@ -159,6 +164,8 @@ function deleteUser(){
 function loadRestaurantContainer(){
     document.querySelector("#linkChangeAddress").innerHTML="<a  href='#' onclick='changeAddress()'><b>Endereço</b></a>";
     document.querySelector("#linkChangeContacts").innerHTML="<a  href='#' onclick='changeContacts()'><b>Contatos</b></a>";
+    document.querySelector("#linkOpenHour").innerHTML="<a  href='#' onclick='changeOpenHour()'><b>Expediente</b></a>";
+
 
 }
 
@@ -176,9 +183,11 @@ function changeAddress(){
         .catch(error => {
             console.log('');
             });
+    setTimeout(function() {
     var script = document.createElement('script');
     script.src = "../Script/updateAddress.js";
     document.body.appendChild(script);
+    }, 50);
 }
 function changeContacts(){
     loadContainer("../HTML/changeContacts.html");
@@ -191,9 +200,32 @@ function changeContacts(){
         .catch(error => {
             console.log('');
             });
+    setTimeout(function() {
     var script = document.createElement('script');
     script.src = "../Script/updateContacts.js";
     document.body.appendChild(script);
+    }, 50);
+}
+
+function changeOpenHour(){
+    
+    loadContainer("../HTML/changeOpenHour.html");
+    
+    fetch('../PHP/getSessionData.php')
+        .then(response => response.json())
+        .then(data => {
+            
+        })
+        .catch(error => {
+            console.log('');
+            });
+    setTimeout(function() {
+        var script = document.createElement('script');
+        script.src = "../Script/updateOpenHour.js";
+        document.body.appendChild(script);
+    }, 50);
+    
+    
 }
 
 viewAccount();

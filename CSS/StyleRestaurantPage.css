@@ -208,6 +208,15 @@
     background-color: #959595;
 }
 
+.text-about-us pre{
+    word-spacing:3px;
+    font-family:times;
+    font-size:large;
+    width: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: auto;
+}
 .textarea-about-us{
     width: 100%;
     min-width: 100%;
@@ -278,4 +287,22 @@
 .address-container td,
 .address-container tr{
     padding: 1vw;
+}
+
+.openhour-container{
+    align-self: center;
+    margin: auto;
+    display: block;
+    color: #fff;
+    box-shadow: inset 0px 0px 10px rgb(0, 0, 0) ;
+    border: 1px solid black;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-family:Arial, Helvetica, sans-serif ;
+    margin-bottom:15px;
+    
+}
+.openhour-container span{
+    display: flex;
 }

@@ -36,3 +36,23 @@ CREATE TABLE IF NOT EXISTS Review (
 
 );
 
+CREATE TABLE IF NOT EXISTS RestaurantOpenHour (
+    openHoursId INT AUTO_INCREMENT PRIMARY KEY,
+    hourOpen1 VARCHAR(5),
+    hourClose1 VARCHAR(5),
+    hourOpen2 VARCHAR(5),
+    hourClose2 VARCHAR(5),
+    hourOpen3 VARCHAR(5),
+    hourClose3 VARCHAR(5),
+    hourOpen4 VARCHAR(5),
+    hourClose4 VARCHAR(5),
+    hourOpen5 VARCHAR(5),
+    hourClose5 VARCHAR(5),
+    hourOpen6 VARCHAR(5),
+    hourClose6 VARCHAR(5),
+    hourOpen7 VARCHAR(5),
+    hourClose7 VARCHAR(5),
+    fk_restaurantId INT,
+    FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId) ON DELETE CASCADE
+    
+);

@@ -16,6 +16,7 @@ if (isset($_SESSION['restaurantCheck']) && $_SESSION['restaurantCheck']===true){
         'streetAddress'=> $_SESSION['streetAddress'],
         'districtAddress'=> $_SESSION['districtAddress'],
         'numberAddress'=> $_SESSION['numberAddress'],
+        
 
     ));
 }

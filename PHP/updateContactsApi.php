@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($conn->query($sql) === TRUE) {
         $_SESSION ['restaurantPhone']=$restaurantPhone;
         $_SESSION ['restaurantLink']=$restaurantLink;
+
         $response = array("");
         echo json_encode($response);
 

@@ -3,7 +3,6 @@ function updateContacts() {
     var restaurantPhone = form.restaurantPhone.value;
     var restaurantLink = form.restaurantLink.value;
 
-
     if (!check(restaurantPhone,restaurantLink)){
         return;
     }

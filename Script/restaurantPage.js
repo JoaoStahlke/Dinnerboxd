@@ -1,3 +1,4 @@
+
 function loadRestaurantPage(){
     var urlParams = new URLSearchParams(window.location.search);
     var restaurantId=urlParams.get("restaurant");
@@ -73,7 +74,7 @@ function loadRestaurantData(){
         else{
             var img = '';
         }
-        document.querySelector(".restaurant-profile-img img").src=img;
+        document.querySelector(".restaurant-profile-img img").src=img+ '?timestamp=' + new Date().getTime();
         document.querySelector(".restaurant-title").innerHTML=data.userName;
         document.querySelector(".cityAddress").innerHTML+=" "+data.cityAddress;
         document.querySelector(".streetAddress").innerHTML+=" "+data.streetAddress;
@@ -81,11 +82,11 @@ function loadRestaurantData(){
         document.querySelector(".numberAddress").innerHTML+=" "+data.numberAddress;
         document.querySelector(".restaurantPhone a").href='https://wa.me/'+data.restaurantPhone;
         document.querySelector(".instagram a").href="https:"+data.restaurantLink;
-        document.querySelector(".section-banner img").src=data.restaurantBanner;
+        document.querySelector(".section-banner img").src=data.restaurantBanner + '?timestamp=' + new Date().getTime();
         if(data.restaurantText == null){
             data.restaurantText='';
         }
-        document.querySelector(".text-about-us").innerHTML=`<p>${data.restaurantText}</p>`;
+        document.querySelector(".text-about-us pre").innerHTML=data.restaurantText;
         
     })
     .catch(error => {
@@ -194,7 +195,7 @@ function changeFile(){
 
 // Update do texto sobre nós
 function clickEditAboutUs(){
-    text=document.querySelector(".text-about-us p").innerHTML;
+    var text=document.querySelector(".text-about-us pre").innerHTML;
     document.querySelector(".text-about-us").innerHTML=`
     <textarea class='textarea-about-us'  rows='4' cols='50'></textarea>
     <div class="buttons-about-us">
@@ -218,7 +219,7 @@ function updateAboutUs(){
     })
     .then(response => response.json())
     .then(data => {
-        document.querySelector(".text-about-us").innerHTML=data.text;
+        document.querySelector(".text-about-us").innerHTML=`<pre>${data.text}</pre>`;
     })
     .catch(error => console.error('Erro no update do texto:', error));
     
@@ -233,7 +234,7 @@ function cancelUpdateAboutUs(){
         if(data.restaurantText == null){
             data.restaurantText='';
         }
-        document.querySelector(".text-about-us").innerHTML=`<p>${data.restaurantText}</p>`;
+        document.querySelector(".text-about-us").innerHTML=`<pre>${data.restaurantText}</pre>`;
         
     })
     .catch(error => {});
@@ -241,7 +242,37 @@ function cancelUpdateAboutUs(){
 
 
 
+function loadStatus(){
+    
+}
+
+function loadOpenHours(){
+    var urlParams = new URLSearchParams(window.location.search);
+    var restaurantId=urlParams.get("restaurant");
+    fetch(`../PHP/openHourApi.php?restaurant=${restaurantId}`)
+    .then(response => response.json())
+    .then(data => {
+        document.querySelector(`#day1`).innerHTML=`${data.hourOpen1.substring(0, 2) + ":" + data.hourOpen1.substring(2)} às ${data.hourClose1.substring(0, 2) + ":" + data.hourClose1.substring(2)}`;
+        document.querySelector(`#day2`).innerHTML=`${data.hourOpen2.substring(0, 2) + ":" + data.hourOpen2.substring(2)} às ${data.hourClose2.substring(0, 2) + ":" + data.hourClose2.substring(2)}`;
+        document.querySelector(`#day3`).innerHTML=`${data.hourOpen3.substring(0, 2) + ":" + data.hourOpen3.substring(2)} às ${data.hourClose3.substring(0, 2) + ":" + data.hourClose3.substring(2)}`;
+        document.querySelector(`#day4`).innerHTML=`${data.hourOpen4.substring(0, 2) + ":" + data.hourOpen4.substring(2)} às ${data.hourClose4.substring(0, 2) + ":" + data.hourClose4.substring(2)}`;
+        document.querySelector(`#day5`).innerHTML=`${data.hourOpen5.substring(0, 2) + ":" + data.hourOpen5.substring(2)} às ${data.hourClose5.substring(0, 2) + ":" + data.hourClose5.substring(2)}`;
+        document.querySelector(`#day6`).innerHTML=`${data.hourOpen6.substring(0, 2) + ":" + data.hourOpen6.substring(2)} às ${data.hourClose6.substring(0, 2) + ":" + data.hourClose6.substring(2)}`;
+        document.querySelector(`#day7`).innerHTML=`${data.hourOpen7.substring(0, 2) + ":" + data.hourOpen7.substring(2)} às ${data.hourClose7.substring(0, 2) + ":" + data.hourClose7.substring(2)}`;
+            
+        
+    })
+    .catch(error => console.error('Erro ao carregar horários:', error));
+}loadOpenHours();
 
 
 
+let dataAtual = new Date();
 
+// Obtendo o horário atual
+let horaAtual = dataAtual.getHours();
+let minutoAtual = dataAtual.getMinutes();
+let day = dataAtual.getDay();
+
+// Exibindo o horário atual
+console.log(`Horário atual: ${horaAtual}${minutoAtual}${day}`);
