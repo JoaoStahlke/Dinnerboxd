@@ -68,7 +68,7 @@ function restaurantBar(){
     fetch('../PHP/getSessionData.php')
         .then(response => response.json())
         .then(data => {
-            document.querySelector("#pageEdit").innerHTML=`<a href='http://localhost/dinnerboxd2/HTML/restaurantPage.html?restaurant=${data.restaurantId}'><b>Editar Página</b></a>`;
+            document.querySelector("#pageEdit").innerHTML=`<a href='../HTML/restaurantPage.html?restaurant=${data.restaurantId}'><b>Editar Página</b></a>`;
         })
         .catch(error => {
             setTimeout(() => {
