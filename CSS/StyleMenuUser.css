@@ -172,3 +172,19 @@ span.sucess{
     border-radius: 5px;
     background-color: #f9f9f9;
 }
+
+
+/* Type */
+
+#restaurantModality,#restaurantCategory{
+    align-self: auto;
+    margin: auto;
+    width: 50%;
+    height: 40%;
+    padding: 3px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+}

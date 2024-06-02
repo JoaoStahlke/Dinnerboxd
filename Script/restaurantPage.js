@@ -97,6 +97,35 @@ function loadRestaurantData(){
 
 }loadRestaurantData();
 
+function loadRestaurantType(){
+    var urlParams = new URLSearchParams(window.location.search);
+    var restaurantId=urlParams.get("restaurant");
+    fetch(`../PHP/typeApi.php?restaurant=${restaurantId}`)
+    .then(response => response.json())
+    .then(data => {
+        if(data.category == null){
+            data.category='';
+        }
+
+        if(data.modality == null){
+            data.modality='';
+        }
+        document.querySelector(".restaurantCategory b").innerHTML=data.category;
+        document.querySelector(".restaurantModality b").innerHTML=data.modality;
+        
+    })
+    .catch(error => {
+        setTimeout(() => {
+            loadRestaurantType()
+        }, 10000)
+        });
+
+}loadRestaurantType();
+
+
+
+
+
 function copyUrltoClipboard(){
     var x =document.querySelector(".share").innerHTML; 
     var url = window.location.href;
@@ -242,7 +271,7 @@ function cancelUpdateAboutUs(){
 
 
 
-function loadStatus(){
+function loadStatus(){ 
     let date = new Date();
     let hour = date.getHours().toString()+date.getMinutes().toString();
     let day = date.getDay();
@@ -251,6 +280,7 @@ function loadStatus(){
     fetch(`../PHP/openHourApi.php?restaurant=${restaurantId}`)
     .then(response => response.json())
     .then(data => {
+        console.log(data[day*2]);
         if (data[day*2] <= data[(day*2)+1]){
             if (hour>=data[day*2] && hour<data[(day*2)+1]){
                 document.querySelector(".restaurantStatus b").innerHTML=' Aberto';

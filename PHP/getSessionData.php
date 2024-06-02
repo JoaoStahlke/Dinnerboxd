@@ -19,6 +19,7 @@ if (isset($_SESSION['restaurantCheck']) && $_SESSION['restaurantCheck']===true){
         
 
     ));
+
 }
 else if(isset($_SESSION['userId'])){
     echo json_encode(array(

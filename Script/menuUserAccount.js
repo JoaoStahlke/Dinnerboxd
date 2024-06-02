@@ -165,8 +165,7 @@ function loadRestaurantContainer(){
     document.querySelector("#linkChangeAddress").innerHTML="<a  href='#' onclick='changeAddress()'><b>Endereço</b></a>";
     document.querySelector("#linkChangeContacts").innerHTML="<a  href='#' onclick='changeContacts()'><b>Contatos</b></a>";
     document.querySelector("#linkOpenHour").innerHTML="<a  href='#' onclick='changeOpenHour()'><b>Expediente</b></a>";
-
-
+    document.querySelector("#linkChangeType").innerHTML="<a  href='#' onclick='changeType()'><b>Tipo</b></a>";
 }
 
 function changeAddress(){
@@ -226,6 +225,23 @@ function changeOpenHour(){
     }, 50);
     
     
+}
+function changeType(){
+    loadContainer("../HTML/changeType.html");
+    // fetch('../PHP/getSessionData.php')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         document.querySelector("input[name='restaurantPhone']").value = data.restaurantPhone;
+    //         document.querySelector("input[name='restaurantLink']").value = data.restaurantLink;
+    //     })
+    //     .catch(error => {
+    //         console.log('');
+    //         });
+    setTimeout(function() {
+    var script = document.createElement('script');
+    script.src = "../Script/updateType.js";
+    document.body.appendChild(script);
+    }, 50);
 }
 
 viewAccount();

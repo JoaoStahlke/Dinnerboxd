@@ -21,7 +21,11 @@ CREATE TABLE IF NOT EXISTS Restaurant (
     restaurantText TEXT,
     restaurantBanner VARCHAR(255),
     FK_userId INT,
+    FK_categoryId INT,
+    FK_modalityyId INT,
     FOREIGN KEY (FK_userId) REFERENCES User(id) ON DELETE CASCADE
+    FOREIGN KEY (FK_categoryId) REFERENCES RestaurantCategory(categoryId) 
+    FOREIGN KEY (FK_modalityId) REFERENCES RestaurantModality(modalityId) 
 );
 
 CREATE TABLE IF NOT EXISTS Review (
@@ -59,17 +63,12 @@ CREATE TABLE IF NOT EXISTS RestaurantOpenHour (
 
 CREATE TABLE IF NOT EXISTS RestaurantModality (
     modalityId INT AUTO_INCREMENT PRIMARY KEY,
-    modality VARCHAR(30),
-    fk_restaurantId INT,
-    FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId)
+    modality VARCHAR(30)
     
 );
 
 
 CREATE TABLE IF NOT EXISTS RestaurantCategory (
     categoryId INT AUTO_INCREMENT PRIMARY KEY,
-    category VARCHAR(30),
-    fk_restaurantId INT,
-    FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId)
-    
+    category VARCHAR(30)
 );
