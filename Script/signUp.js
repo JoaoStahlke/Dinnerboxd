@@ -136,21 +136,36 @@ function check (userName,email,password,repeatPassword){
             document.querySelector("label[for='email']").removeChild(document.querySelector("label[for='email'] span"));}
         document.querySelector("input[name='email']").style.borderColor = "";
     }
+    var errorMessage='';
+    if(password.length<8){
+        errorMessage += "<br>A senha deve ter no mínimo 8 caracteres.";
 
-
-    if(password.length<=5){
+    }
+    if (!/[A-Z]/.test(password)) {
+        errorMessage += "<br>A senha deve conter pelo menos uma letra maiúscula.";
+    }
+    if (!/[a-z]/.test(password)) {
+        errorMessage += "<br>A senha deve conter pelo menos uma letra minúscula.";
+    }
+    if (!/\d/.test(password)) {
+        errorMessage += "<br>A senha deve conter pelo menos um número.";
+    }
+    if (!/[^A-Za-z0-9]/.test(password)) {
+        errorMessage += "<br>A senha deve conter pelo menos um caractere especial.";
+    }
+    if (errorMessage !== "") {
         document.querySelector("input[name='password']").style.borderColor = "red";
         var error = document.querySelector("label[for='password']");
-        if(document.querySelector("label[for='password'] span") !=null){
-            error.removeChild(document.querySelector("label[for='password'] span"));}
-        error.innerHTML+=" <span class='error'>Sua senha deve ter no minímo 6 caracteres.</span>";
         
+        if (document.querySelector("label[for='password'] span") != null) {
+            error.removeChild(document.querySelector("label[for='password'] span"));
+        }
+        error.innerHTML += " <span class='error'>" + errorMessage + "</span>";
     }
-    else{
-        if(document.querySelector("label[for='password'] span") !=null){
-            document.querySelector("label[for='password']").removeChild(document.querySelector("span"));}
-        document.querySelector("input[name='password']").style.borderColor = "";
-    }
+    else {
+        if (document.querySelector("label[for='password'] span") != null) {
+            document.querySelector("label[for='password']").removeChild(document.querySelector("span"));
+        }}
 
     if (password!==repeatPassword){
         document.querySelector("input[name='repeatPassword']").style.borderColor = "red";
