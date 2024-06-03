@@ -8,6 +8,17 @@ CREATE TABLE IF NOT EXISTS User (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
+CREATE TABLE IF NOT EXISTS RestaurantModality (
+    modalityId INT AUTO_INCREMENT PRIMARY KEY,
+    modality VARCHAR(30)
+    
+);
+
+
+CREATE TABLE IF NOT EXISTS RestaurantCategory (
+    categoryId INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(30)
+);
 
 CREATE TABLE IF NOT EXISTS Restaurant (
     restaurantId INT AUTO_INCREMENT PRIMARY KEY,
@@ -22,9 +33,9 @@ CREATE TABLE IF NOT EXISTS Restaurant (
     restaurantBanner VARCHAR(255),
     FK_userId INT,
     FK_categoryId INT,
-    FK_modalityyId INT,
-    FOREIGN KEY (FK_userId) REFERENCES User(id) ON DELETE CASCADE
-    FOREIGN KEY (FK_categoryId) REFERENCES RestaurantCategory(categoryId) 
+    FK_modalityId INT,
+    FOREIGN KEY (FK_userId) REFERENCES User(id) ON DELETE CASCADE,
+    FOREIGN KEY (FK_categoryId) REFERENCES RestaurantCategory(categoryId), 
     FOREIGN KEY (FK_modalityId) REFERENCES RestaurantModality(modalityId) 
 );
 
@@ -59,16 +70,4 @@ CREATE TABLE IF NOT EXISTS RestaurantOpenHour (
     FK_restaurantId INT,
     FOREIGN KEY (FK_restaurantId) REFERENCES Restaurant(RestaurantId) ON DELETE CASCADE
     
-);
-
-CREATE TABLE IF NOT EXISTS RestaurantModality (
-    modalityId INT AUTO_INCREMENT PRIMARY KEY,
-    modality VARCHAR(30)
-    
-);
-
-
-CREATE TABLE IF NOT EXISTS RestaurantCategory (
-    categoryId INT AUTO_INCREMENT PRIMARY KEY,
-    category VARCHAR(30)
 );
